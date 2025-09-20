@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>경제력 테스트 - 당신의 금융 습관을 체크해보세요!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 시작 화면 -->
+        <div id="start-screen" class="screen active">
+            <div class="start-content">
+                <div class="logo">
+                    <img src="./img/32.png" alt="앱 로고" />
+                </div>
+                <h1>경제력 테스트</h1>
+                <p class="subtitle">금융 습관과 경제 센스를 확인해보세요!</p>
+                <div class="test-info">
+                    <div class="info-item">
+                        <i class="fas fa-clock"></i>
+                        <span>약 5분 소요</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-list-ol"></i>
+                        <span>총 10문항</span>
+                    </div>
+                </div>
+                <button id="start-btn" class="primary-btn">
+                    <i class="fas fa-play"></i>
+                    테스트 시작하기
+                </button>
+            </div>
+        </div>
+
+        <!-- 문항 화면 -->
+        <div id="question-screen" class="screen">
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+                <span class="progress-text">1 / 10</span>
+            </div>
+            
+            <div class="question-content">
+                <h2 id="question-title"></h2>
+                <div id="question-options" class="options-container">
+                    <!-- 선택지들이 동적으로 생성됩니다 -->
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button id="prev-btn" class="nav-btn" disabled>
+                        <i class="fas fa-chevron-left"></i>
+                        이전
+                    </button>
+                    <button id="next-btn" class="nav-btn primary" disabled>
+                        다음
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 결과 화면 -->
+        <div id="result-screen" class="screen">
+            <div class="result-content">
+                <div class="result-icon">
+                    <i id="result-emoji" class="fas fa-trophy"></i>
+                </div>
+                <h2 id="result-type"></h2>
+                <p id="result-nickname" class="nickname"></p>
+                <div id="result-score" class="score"></div>
+                <div id="result-analysis" class="analysis"></div>
+                <div id="result-advice" class="advice"></div>
+                
+                <div class="result-actions">
+                    <button id="restart-btn" class="primary-btn">
+                        <i class="fas fa-redo"></i>
+                        다시 테스트하기
+                    </button>
+                    <button id="share-btn" class="secondary-btn">
+                        <i class="fas fa-share"></i>
+                        결과 공유하기
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/questions.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
