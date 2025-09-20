@@ -1,4 +1,25 @@
 /* 기본 스타일 */
+@media (hover: hover) and (pointer: fine) {
+  .option:hover {
+    transform: translateX(5px);
+  }
+}
+
+/* 터치 환경 기본값 보정 */
+@media (hover: none) and (pointer: coarse) {
+  .option,
+  .option:hover,
+  .option:active,
+  .option:focus {
+    transform: none !important;
+  }
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+
 * {
     margin: 0;
     padding: 0;
@@ -41,6 +62,7 @@ body {
         opacity: 0;
         transform: translateY(30px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -50,38 +72,53 @@ body {
 /* 시작 화면 */
 
 #start-screen.active {
-  display: flex !important;   /* .screen.active의 display:block 대신 flex 적용 */
-  align-items: center;         /* 수직 중앙 */
-  justify-content: center;     /* 수평 중앙 */
+    display: flex !important;
+    /* .screen.active의 display:block 대신 flex 적용 */
+    align-items: center;
+    /* 수직 중앙 */
+    justify-content: center;
+    /* 수평 중앙 */
 }
 
 .start-content {
     text-align: center;
 }
 
+#start-btn {
+  margin-bottom: 20px;
+}
+
 .logo {
-  width: 8rem;
-  height: 8rem;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    width: 8rem;
+    height: 8rem;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .logo img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;               /* 비율 유지하여 박스 안에 맞춤 */
-  display: block;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    /* 비율 유지하여 박스 안에 맞춤 */
+    display: block;
 }
 
 @keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
         transform: translateY(0);
     }
+
     40% {
         transform: translateY(-10px);
     }
+
     60% {
         transform: translateY(-5px);
     }
@@ -97,14 +134,14 @@ h1 {
 .subtitle {
     font-size: 1.1rem;
     color: #718096;
-    margin-bottom: 40px;
+    margin-bottom: 54px;
 }
 
 .test-info {
     display: flex;
     justify-content: center;
     gap: 30px;
-    margin-bottom: 40px;
+    margin-bottom: 48px;
     flex-wrap: wrap;
 }
 
@@ -127,7 +164,9 @@ h1 {
 }
 
 /* 버튼 스타일 */
-.primary-btn, .secondary-btn, .nav-btn {
+.primary-btn,
+.secondary-btn,
+.nav-btn {
     padding: 15px 30px;
     border: none;
     border-radius: 50px;
@@ -189,7 +228,7 @@ h1 {
 
 /* 문항 화면 */
 .progress-bar {
-    background: #f7fafc;
+    background: #dfe5e9;
     height: 8px;
     border-radius: 4px;
     margin-bottom: 30px;
@@ -222,12 +261,12 @@ h1 {
     font-size: 1.8rem;
     font-weight: 600;
     color: #2d3748;
-    margin-bottom: 40px;
+    margin-bottom: 66px;
     line-height: 1.4;
 }
 
 .options-container {
-    margin-bottom: 50px;
+    margin-bottom: 56px;
 }
 
 .option {
@@ -250,9 +289,36 @@ h1 {
 }
 
 .option.selected {
+    position: relative;
     background: linear-gradient(135deg, #667eea15, #764ba215);
-    border-color: #FC006A;
+    /* 내부 배경 */
     color: #2d3748;
+    /* 실제 border는 두지 않음(안쪽으로 먹히니까) */
+}
+
+.option.selected::before {
+    --r: 15px;
+    --w: 3px;
+
+    content: "";
+    position: absolute;
+    inset: calc(-1 * var(--w));
+    border-radius: calc(var(--r) + var(--w));
+    background: linear-gradient(135deg, #FC006A, #FFB33A);
+
+    padding: var(--w);
+    mask: 
+        linear-gradient(white 0 0) content-box,
+        linear-gradient(white 0 0);
+    mask-composite: exclude;
+    
+    /* WebKit 호환성 */
+    -webkit-mask: 
+        linear-gradient(white 0 0) content-box,
+        linear-gradient(white 0 0);
+    -webkit-mask-composite: xor;
+
+    pointer-events: none;
 }
 
 .option-number {
@@ -267,6 +333,7 @@ h1 {
     font-weight: 600;
     font-size: 0.9rem;
     flex-shrink: 0;
+    line-height: 30px;
 }
 
 .option.selected .option-number {
@@ -291,6 +358,7 @@ h1 {
 }
 
 .result-icon {
+    margin-top: 30px;
     margin-bottom: 20px;
 }
 
@@ -303,9 +371,11 @@ h1 {
     0% {
         transform: scale(1);
     }
+
     50% {
         transform: scale(1.1);
     }
+
     100% {
         transform: scale(1);
     }
@@ -315,31 +385,42 @@ h1 {
     font-size: 2.2rem;
     font-weight: 700;
     color: #2d3748;
-    margin-bottom: 10px;
 }
 
 .nickname {
     font-size: 1.3rem;
     color: #FC006A;
     font-weight: 600;
-    margin-bottom: 20px;
+    margin-bottom: 44px;
 }
 
 .score {
-    background: linear-gradient(135deg, #667eea15, #764ba215);
+    background: #f7fafc;
     border-radius: 15px;
-    padding: 20px;
-    margin-bottom: 30px;
+    padding: 16px 20px 20px 20px;
+    margin-bottom: 16px;
     font-size: 1.5rem;
     font-weight: 700;
     color: #2d3748;
+}
+
+.score-main {
+  font-size: 2.2rem;     /* 더 크게 */
+  font-weight: 700;
+  color: #FC006A;        /* 포인트 컬러 */
+}
+
+.score-sub {
+  font-size: 1.2rem;     /* 작게 */
+  font-weight: 500;
+  color: #2d3748;        /* 진회색 */
 }
 
 .analysis {
     background: #f7fafc;
     border-radius: 15px;
     padding: 25px;
-    margin-bottom: 25px;
+    margin-bottom: 16px;
     text-align: left;
 }
 
@@ -363,7 +444,7 @@ h1 {
     border: 2px solid #81e6d9;
     border-radius: 15px;
     padding: 25px;
-    margin-bottom: 40px;
+    margin-bottom: 60px;
     text-align: left;
 }
 
@@ -392,6 +473,7 @@ h1 {
     justify-content: center;
     gap: 20px;
     flex-wrap: wrap;
+    margin-bottom: 20px;
 }
 
 /* 반응형 디자인 */
@@ -447,7 +529,8 @@ h1 {
         flex-direction: column;
     }
 
-    .primary-btn, .secondary-btn {
+    .primary-btn,
+    .secondary-btn {
         width: 100%;
         justify-content: center;
     }
@@ -478,3 +561,4 @@ h1 {
         font-size: 0.95rem;
     }
 }
+

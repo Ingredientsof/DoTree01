@@ -201,8 +201,9 @@ function updateResultScreen(result, score) {
     
     // 점수
     document.getElementById('result-score').innerHTML = `
-        <strong>${score}점</strong> / 100점
-    `;
+  <span class="score-main">${score}</span>
+  <span class="score-sub"> / 100점</span>
+`;
     
     // 분석
     document.getElementById('result-analysis').innerHTML = `
